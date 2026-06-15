@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - ЦДТТ "Юность"</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <h1>ЦДТТ "Юность"</h1>
+                <p>Техническое творчество детей</p>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О центре</a></li>
+                    <li><a href="programs.html">Направления</a></li>
+                    <li><a href="news.html">Новости и статьи</a></li>
+                    <li><a href="contacts.html" class="active">Контакты</a></li>
+                    <li><a href="admin.html">Вход</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" style="padding: 40px 0;">
+            <div class="container">
+                <h1>Контакты</h1>
+                <p>Свяжитесь с нами любым удобным способом</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                    <div>
+                        <h3 style="color: #2c5282; margin-bottom: 20px;">📞 Контактная информация</h3>
+                        <p><strong>Адрес:</strong><br>Московская обл., г. Сергиев Посад,<br>пр-д Новозагорский, д. 3А</p>
+                        <p><strong>Телефон:</strong><br>+7 (495) 123-45-67</p>
+                        <p><strong>Email:</strong><br>info@cdtt-yunost.ru</p>
+                        <p><strong>График работы:</strong><br>Пн-Пт: 09:00 - 20:00<br>Сб: 10:00 - 15:00<br>Вс: выходной</p>
+                    </div>
+
+                    <div>
+                        <h3 style="color: #2c5282; margin-bottom: 20px;">✉️ Напишите нам</h3>
+                        <form id="feedbackForm" style="display: flex; flex-direction: column; gap: 15px;">
+                            <input type="text" id="name" placeholder="Ваше имя *" required style="padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                            <input type="tel" id="phone" placeholder="Телефон" style="padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                            <input type="email" id="email" placeholder="Email" style="padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                            <input type="text" id="subject" placeholder="Тема обращения" style="padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                            <textarea id="message" placeholder="Сообщение *" rows="5" required style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; resize: vertical;"></textarea>
+                            <button type="submit" class="btn btn-primary" style="width: 200px;">Отправить</button>
+                            <div id="formStatus" style="margin-top: 10px;"></div>
+                        </form>
+                        <p style="margin-top: 20px; font-size: 0.8rem; color: #666;">* — поля, обязательные для заполнения</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>ЦДТТ "Юность"</h4>
+                    <p>Центр детского технического творчества<br>Обучение детей с 1964 года</p>
+                </div>
+                <div>
+                    <h4>Контакты</h4>
+                    <p>г. Сергиев Посад,<br>пр-д Новозагорский, д. 3А</p>
+                    <p>Тел: +7 (495) 123-45-67<br>Email: info@cdtt-yunost.ru</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© ЦДТТ "Юность". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        // Отправка формы (для GitHub Pages — только демонстрация)
+        const form = document.getElementById('feedbackForm');
+        const statusDiv = document.getElementById('formStatus');
+
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                statusDiv.innerHTML = '<span style="color: #2c5282;">⚠️ Для отправки сообщений на GitHub Pages нужен сервер. Пожалуйста, свяжитесь по телефону или email.</span>';
+            });
+        }
+    </script>
+</body>
+</html>

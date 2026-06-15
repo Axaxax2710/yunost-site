@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости и статьи - ЦДТТ "Юность"</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <h1>ЦДТТ "Юность"</h1>
+                <p>Техническое творчество детей</p>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О центре</a></li>
+                    <li><a href="programs.html">Направления</a></li>
+                    <li><a href="news.html" class="active">Новости и статьи</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="admin.html">Вход</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" style="padding: 40px 0;">
+            <div class="container">
+                <h1>Новости и статьи</h1>
+                <p>Будьте в курсе событий и полезных материалов</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="filter-buttons" style="display: flex; gap: 15px; justify-content: center; margin-bottom: 40px;">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="news">Новости</button>
+                    <button class="filter-btn" data-filter="article">Статьи</button>
+                </div>
+
+                <div class="news-list">
+                    <div class="post-card" data-type="news">
+                        <h3><a href="post.html">Открыт набор на новый учебный год</a></h3>
+                        <div class="post-meta">
+                            <span>15 июня 2025</span>
+                            <span class="post-type news">Новость</span>
+                        </div>
+                        <p>ЦДТТ "Юность" объявляет набор детей в объединения на 2025-2026 учебный год. Запись открыта на все направления: авиамоделирование, робототехнику, судомоделирование и другие. Успейте выбрать программу для вашего ребёнка!</p>
+                    </div>
+
+                    <div class="post-card" data-type="news">
+                        <h3><a href="post.html">Победа в областном конкурсе технического творчества</a></h3>
+                        <div class="post-meta">
+                            <span>10 июня 2025</span>
+                            <span class="post-type news">Новость</span>
+                        </div>
+                        <p>Воспитанники центра завоевали три первых места в региональном этапе Всероссийской олимпиады по техническому творчеству. Поздравляем наших ребят и педагогов с блестящим результатом!</p>
+                    </div>
+
+                    <div class="post-card" data-type="article">
+                        <h3><a href="post.html">Робототехника для начинающих: советы педагогов</a></h3>
+                        <div class="post-meta">
+                            <span>5 июня 2025</span>
+                            <span class="post-type article">Статья</span>
+                        </div>
+                        <p>Как выбрать первый конструктор и с чего начать изучение робототехники. Рекомендации наших педагогов помогут сделать первые шаги в этом увлекательном мире.</p>
+                    </div>
+
+                    <div class="post-card" data-type="news">
+                        <h3><a href="post.html">День открытых дверей в ЦДТТ "Юность"</a></h3>
+                        <div class="post-meta">
+                            <span>20 мая 2025</span>
+                            <span class="post-type news">Новость</span>
+                        </div>
+                        <p>Приглашаем родителей и детей на день открытых дверей! Вы сможете посетить мастер-классы, пообщаться с педагогами и увидеть работы воспитанников.</p>
+                    </div>
+
+                    <div class="post-card" data-type="article">
+                        <h3><a href="post.html">Как выбрать технический кружок для ребёнка</a></h3>
+                        <div class="post-meta">
+                            <span>12 мая 2025</span>
+                            <span class="post-type article">Статья</span>
+                        </div>
+                        <p>Полезные советы для родителей: на что обратить внимание при выборе направления, как понять, что ребёнку действительно интересно, и как поддержать его увлечение.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>ЦДТТ "Юность"</h4>
+                    <p>Центр детского технического творчества<br>Обучение детей с 1964 года</p>
+                </div>
+                <div>
+                    <h4>Контакты</h4>
+                    <p>г. Сергиев Посад,<br>пр-д Новозагорский, д. 3А</p>
+                    <p>Тел: +7 (495) 123-45-67<br>Email: info@cdtt-yunost.ru</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© ЦДТТ "Юность". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        // Фильтрация новостей
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const posts = document.querySelectorAll('.post-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                posts.forEach(post => {
+                    if (filter === 'all' || post.dataset.type === filter) {
+                        post.style.display = 'block';
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

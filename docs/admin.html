@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - ЦДТТ "Юность"</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .admin-header h1 {
+            color: #2c5282;
+            font-size: 1.8rem;
+        }
+        .logout-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+        }
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #f59e0b;
+        }
+        .stat-card .label {
+            color: #4a5568;
+            margin-top: 8px;
+        }
+        .section-title {
+            font-size: 1.4rem;
+            color: #2c5282;
+            margin: 30px 0 20px;
+        }
+        .post-row {
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #e2e8f0;
+        }
+        .post-title {
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 5px;
+        }
+        .post-meta {
+            font-size: 0.8rem;
+            color: #718096;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-top: 5px;
+        }
+        .post-type-news {
+            background: #dc2626;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+        .post-type-article {
+            background: #3498db;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+        .featured-badge {
+            color: #f59e0b;
+            font-size: 0.8rem;
+        }
+        .edit-btn, .delete-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .edit-btn {
+            background: #3498db;
+            color: white;
+        }
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+            margin-left: 8px;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c5282;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .login-btn {
+            width: 100%;
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        .hidden {
+            display: none;
+        }
+        .notice {
+            background: #fef3c7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+            color: #92400e;
+        }
+        .error-text {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Панель входа -->
+<div id="loginPanel" class="login-container">
+    <h2>Вход в админ-панель</h2>
+    <input type="text" id="loginUsername" placeholder="Логин">
+    <input type="password" id="loginPassword" placeholder="Пароль">
+    <button class="login-btn" onclick="login()">Войти</button>
+    <div id="loginError" class="hidden error-text"></div>
+</div>
+
+<!-- Основная админ-панель -->
+<div id="adminPanel" class="admin-container hidden">
+    <div class="admin-header">
+        <h1>Панель управления сайтом</h1>
+        <button class="logout-btn" onclick="logout()">Выйти</button>
+    </div>
+
+    <!-- Статистика -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="value" id="statPosts">5</div>
+            <div class="label">Всего публикаций</div>
+        </div>
+        <div class="stat-card">
+            <div class="value" id="statNews">3</div>
+            <div class="label">Новостей</div>
+        </div>
+        <div class="stat-card">
+            <div class="value" id="statArticles">2</div>
+            <div class="label">Статей</div>
+        </div>
+        <div class="stat-card">
+            <div class="value" id="statFeedback">0</div>
+            <div class="label">Обращений</div>
+        </div>
+    </div>
+
+    <!-- Список публикаций -->
+    <h2 class="section-title">Управление публикациями</h2>
+    <div id="postsList">
+        <div class="post-row">
+            <div>
+                <div class="post-title">Открыт набор на новый учебный год</div>
+                <div class="post-meta">
+                    <span>15 июня 2025</span>
+                    <span class="post-type-news">Новость</span>
+                    <span class="featured-badge">⭐ На главной</span>
+                </div>
+            </div>
+            <div>
+                <button class="edit-btn" onclick="showDemoMessage()">✏️ Редактировать</button>
+                <button class="delete-btn" onclick="showDemoMessage()">🗑️ Удалить</button>
+            </div>
+        </div>
+        <div class="post-row">
+            <div>
+                <div class="post-title">Победа в областном конкурсе технического творчества</div>
+                <div class="post-meta">
+                    <span>10 июня 2025</span>
+                    <span class="post-type-news">Новость</span>
+                </div>
+            </div>
+            <div>
+                <button class="edit-btn" onclick="showDemoMessage()">✏️ Редактировать</button>
+                <button class="delete-btn" onclick="showDemoMessage()">🗑️ Удалить</button>
+            </div>
+        </div>
+        <div class="post-row">
+            <div>
+                <div class="post-title">Робототехника для начинающих: советы педагогов</div>
+                <div class="post-meta">
+                    <span>5 июня 2025</span>
+                    <span class="post-type-article">Статья</span>
+                </div>
+            </div>
+            <div>
+                <button class="edit-btn" onclick="showDemoMessage()">✏️ Редактировать</button>
+                <button class="delete-btn" onclick="showDemoMessage()">🗑️ Удалить</button>
+            </div>
+        </div>
+        <div class="post-row">
+            <div>
+                <div class="post-title">День открытых дверей в ЦДТТ "Юность"</div>
+                <div class="post-meta">
+                    <span>20 мая 2025</span>
+                    <span class="post-type-news">Новость</span>
+                </div>
+            </div>
+            <div>
+                <button class="edit-btn" onclick="showDemoMessage()">✏️ Редактировать</button>
+                <button class="delete-btn" onclick="showDemoMessage()">🗑️ Удалить</button>
+            </div>
+        </div>
+        <div class="post-row">
+            <div>
+                <div class="post-title">Как выбрать технический кружок для ребёнка</div>
+                <div class="post-meta">
+                    <span>12 мая 2025</span>
+                    <span class="post-type-article">Статья</span>
+                </div>
+            </div>
+            <div>
+                <button class="edit-btn" onclick="showDemoMessage()">✏️ Редактировать</button>
+                <button class="delete-btn" onclick="showDemoMessage()">🗑️ Удалить</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="notice">
+        ⚠️ Это демонстрационная версия админ-панели.<br>
+        Полноценное управление контентом (добавление, редактирование, удаление публикаций)<br>
+        доступно при запуске сайта локально через <strong>node server.js</strong>.
+    </div>
+</div>
+
+<script>
+    function login() {
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+        const errorDiv = document.getElementById('loginError');
+        
+        if (username === 'admin' && password === 'admin123') {
+            document.getElementById('loginPanel').classList.add('hidden');
+            document.getElementById('adminPanel').classList.remove('hidden');
+            errorDiv.classList.add('hidden');
+        } else {
+            errorDiv.textContent = 'Неверный логин или пароль';
+            errorDiv.classList.remove('hidden');
+        }
+    }
+    
+    function logout() {
+        document.getElementById('loginPanel').classList.remove('hidden');
+        document.getElementById('adminPanel').classList.add('hidden');
+        document.getElementById('loginUsername').value = '';
+        document.getElementById('loginPassword').value = '';
+    }
+    
+    function showDemoMessage() {
+        alert('Редактирование доступно только в локальной версии с сервером.\nЗапустите сайт через node server.js');
+    }
+</script>
+</body>
+</html>
